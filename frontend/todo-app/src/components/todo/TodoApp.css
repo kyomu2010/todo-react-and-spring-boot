@@ -1,0 +1,17 @@
+body {
+  padding: 15px 30px;
+}
+
+.alert {
+  color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+.message {
+  text-align: left;
+}
