@@ -33,18 +33,27 @@ class LoginComponent extends Component {
   // }
 
   loginClicked() {
-    console.log('loginClicked', this.state);
-    if(this.state.username==='user' && this.state.password==='password') {
-      console.log('Login Successful');
-      AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-      this.props.history.push(`/welcome/${this.state.username}`);
-      // this.setState({showSuccessMessage: true});
-      // this.setState({hasLoginFailed: false})
-    }else {
-      console.log('Invalid Credentials');
-      this.setState({hasLoginFailed: true});
-      this.setState({showSuccessMessage: false});
-    }
+    //console.log('loginClicked', this.state);
+    // if(this.state.username==='user' && this.state.password==='password') {
+    //   //console.log('Login Successful');
+    //   AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+    //   this.props.history.push(`/welcome/${this.state.username}`);
+    //   // this.setState({showSuccessMessage: true});
+    //   // this.setState({hasLoginFailed: false})
+    // }else {
+    //   //console.log('Invalid Credentials');
+    //   // this.setState({hasLoginFailed: true});
+    //   // this.setState({showSuccessMessage: false});
+    // }
+
+    AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+    .then(() => {
+        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+        this.props.history.push(`/welcome/${this.state.username}`);
+      }).catch(() => {
+        this.setState({hasLoginFailed: true})
+        this.setState({showSuccessMessage: false})
+      })
   }
 
   render() {
